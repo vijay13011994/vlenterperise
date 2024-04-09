@@ -95,8 +95,8 @@ const addTrackingSchema = Joi.object({
     cl_uuid: Joi.string().required(),
     name: Joi.string().required(),
     package_type: Joi.string().required(),
-    expected_delivery_date: Joi.number().required(),
-    promised_delivery_date: Joi.number().required(),
+    expected_delivery_date: Joi.string().required(),
+    promised_delivery_date: Joi.string().required(),
     timestamp: Joi.number().required(),
     status: Joi.string().required()
 });
