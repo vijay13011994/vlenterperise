@@ -19,4 +19,30 @@ const createTracking = async (req, res) => {
     }
 }
 
-module.exports = {createTracking};
+const getTracking = async (req, res) => {
+    try{
+        const {lrnums} = req.body;
+        const promArr = [];
+        lrnums.forEach(lrnum => {
+            promArr.push(db.trackings.findAll({where : {lrnum}}));
+        });
+        const result = await Promise.allSettled(promArr);
+        const data = [];
+        result.forEach(x=>{
+            if(x.status === 'fulfilled'){
+                data.push({
+                    lrnum: x.value[0].lrnum,
+                    status: x.value[0].status,
+                    location: x.value[0].location,
+                    wbns: x.value
+                });
+            }
+        });
+        return res.status(200).json({status:200, msg:"OK", data});
+    }catch(e){
+        console.log(e);
+        return res.status(200).json({status: 500, msg: 'Internal Server Error' });
+    }
+}
+
+module.exports = {createTracking, getTracking};
