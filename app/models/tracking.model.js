@@ -34,11 +34,11 @@ const trackings = (sequelize, DataTypes)=>{
             allowNull: false
         },
         expected_delivery_date: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATE,
             allowNull: false
         },
         promised_delivery_date: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATE,
             allowNull: false
         },
         timestamp: {
